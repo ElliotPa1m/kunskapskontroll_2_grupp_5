@@ -1,0 +1,21 @@
+
+:root {
+  
+  --text-color: #c9cba3;
+  --header-footer-bg: #ffe1a8;
+  --button-color: #e26d5c;
+  --bg-color: #ffffff;
+
+  --fs-headline: 32px;
+  --fs-body: 16px;
+  --fs-fine-print: 5px; 
+  
+  --text-max-width: 200px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
