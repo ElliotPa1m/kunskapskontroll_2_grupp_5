@@ -15,6 +15,7 @@ async function loadWorkerImages() {
         if (movingWorker?.workers) {
             document.getElementById('moving-worker-img').src = movingWorker.workers.image;
             document.getElementById('moving-worker-img').alt = movingWorker.workers.name;
+            document.getElementById('moving-worker-name').textContent = movingWorker.workers.name;
         }
 
         const { data: groceryWorker } = await supabaseClient
@@ -27,6 +28,7 @@ async function loadWorkerImages() {
         if (groceryWorker?.workers) {
             document.getElementById('grocery-shopping-worker-img').src = groceryWorker.workers.image;
             document.getElementById('grocery-shopping-worker-img').alt = groceryWorker.workers.name;
+            document.getElementById('grocery-shopping-worker-name').textContent = groceryWorker.workers.name
         }
 
         const { data: homeworkWorker } = await supabaseClient
@@ -39,6 +41,7 @@ async function loadWorkerImages() {
         if (homeworkWorker?.workers) {
             document.getElementById('homework-childcare-worker-img').src = homeworkWorker.workers.image;
             document.getElementById('homework-childcare-worker-img').alt = homeworkWorker.workers.name;
+            document.getElementById('homework-childcare-worker-name').textContent = homeworkWorker.workers.name
         }
 
         const { data: petWorker } = await supabaseClient
@@ -51,6 +54,7 @@ async function loadWorkerImages() {
         if (petWorker?.workers) {
             document.getElementById('pet-house-sitting-worker-img').src = petWorker.workers.image;
             document.getElementById('pet-house-sitting-worker-img').alt = petWorker.workers.name;
+            document.getElementById('pet-house-sitting-worker-name').textContent = petWorker.workers.name
         }
     } catch (error) {
         console.error('Error loading workers', error);
