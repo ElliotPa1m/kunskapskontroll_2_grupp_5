@@ -2,13 +2,19 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const supabaseUrl = 'https://wewmzmizeoxntuunlbzb.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indld216bWl6ZW94bnR1dW5sYnpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5NTc2ODIsImV4cCI6MjA5MDUzMzY4Mn0.B6ZVnHqsHGCTFwRrZpFsITFJvci7U_5OAL6537cLc7c'
 const supabaseClient = createClient(supabaseUrl, supabaseKey);
+export const SERVICE_WORKERS = {
+  MOVING_WORKER_SERVICE_ID: 1,
+  HOMEWORK_WORKER_SERVICE_ID: 2,
+  PET_WORKER_SERVICE_ID: 3,
+  GROCERY_WORKER_SERVICE_ID: 4,
+}
 
-async function loadWorkerImages() {
+export async function loadWorkerImages() {
     try {
         const { data: movingWorker } = await supabaseClient
             .from('worker_service')
             .select('workers(image, name)')
-            .eq('service_id', 1)
+            .eq('service_id', SERVICE_WORKERS.MOVING_WORKER_SERVICE_ID)
             .limit(1)
             .maybeSingle();
 
@@ -21,7 +27,7 @@ async function loadWorkerImages() {
         const { data: groceryWorker } = await supabaseClient
             .from('worker_service')
             .select('workers(image, name)')
-            .eq('service_id', 4)
+            .eq('service_id', SERVICE_WORKERS.GROCERY_WORKER_SERVICE_ID)
             .limit(1)
             .maybeSingle();
 
@@ -34,7 +40,7 @@ async function loadWorkerImages() {
         const { data: homeworkWorker } = await supabaseClient
             .from('worker_service')
             .select('workers(image, name)')
-            .eq('service_id', 2)
+            .eq('service_id', SERVICE_WORKERS.HOMEWORK_WORKER_SERVICE_ID)
             .limit(1)
             .maybeSingle();
 
@@ -47,7 +53,7 @@ async function loadWorkerImages() {
         const { data: petWorker } = await supabaseClient
             .from('worker_service')
             .select('workers(image, name)')
-            .eq('service_id', 3)
+            .eq('service_id', SERVICE_WORKERS.PET_WORKER_SERVICE_ID)
             .limit(1)
             .maybeSingle();
 
