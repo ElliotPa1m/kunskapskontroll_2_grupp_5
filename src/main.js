@@ -67,4 +67,4 @@ export async function loadWorkerImages() {
     }
 }
 
-loadWorkerImages();
+document.addEventListener('DOMContentLoaded', loadWorkerImages);

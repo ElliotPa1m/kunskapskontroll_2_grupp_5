@@ -1,11 +1,30 @@
 import { test, expect, vi } from "vitest";
 import { loadWorkerImages } from "../../src/main.js";
+// vi.mock('https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm', () => {
+//   return {
+//     createClient: vi.fn(() => ({
+//       from: vi.fn(() => ({
+//         select: vi.fn().mockReturnThis(),
+//         eq: vi.fn().mockReturnThis(),
+//       })),
+//     })),
+//   };
+// });
 vi.mock('https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm', () => {
   return {
     createClient: vi.fn(() => ({
       from: vi.fn(() => ({
         select: vi.fn().mockReturnThis(),
         eq: vi.fn().mockReturnThis(),
+        limit: vi.fn().mockReturnThis(),
+        maybeSingle: vi.fn().mockResolvedValue({
+          data: {
+            workers: {
+              image: 'https://example.com/worker.jpg',
+              name: 'Erik Andersson'
+            }
+          }
+        })
       })),
     })),
   };
