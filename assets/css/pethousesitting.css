@@ -40,7 +40,7 @@ body {
   margin-top: 15px;
 }
 
-button {
+.buttons button {
   background-color: var(--button-color);
   color: var(--text-color);
   width: 120px;
