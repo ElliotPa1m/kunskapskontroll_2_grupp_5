@@ -1,12 +1,13 @@
+
+
 import { test, expect } from "@playwright/test";
 
-test("full flow: load posts and tags on start", async ({ page }) => {
-  await page.goto("/");
+test("movingsidan visar container", async ({page}) => {
 
-  await expect(page.locator(".post-card").first()).toBeVisible();
-  await expect(page.locator(".post-card")).not.toHaveCount(0);
+ await page.goto("/moving.html");
 
-  let options = page.locator("#tag-filter option");
-  await expect(options.first()).toHaveText("Alla");
-  expect(await options.count()).toBeGreaterThan(1);
-});
+const container = page.locator("#movers");
+
+await expect(container).toBeVisible();
+
+})

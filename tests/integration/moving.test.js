@@ -1,30 +1,28 @@
-import { describe, test, expect, beforeEach, vi } from "vitest";
+import { describe, test, expect } from "vitest";
+import { createMoverCard } from "../../src/moving-view.js";
 
-describe("app integration", () => {
-  beforeEach(() => {
-    vi.resetModules();
-    vi.stubGlobal("fetch", vi.fn());
-    fetch.mockResolvedValue({
-      ok: true,
-      json: async () => ({ Response: "False" }),
-    });
-    document.body.innerHTML = `
-      <main class="container">
-        <h1>Inlägg</h1>
-        <select id="tag-filter"><option value="">Alla</option></select>
-        <div id="post-list"></div>
-      </main>
-    `;
-  });
+describe("Rendera movers", () => {
 
-  test("fetchPosts returns posts from API", async () => {
-    let postData = { posts: [{ id: 1, title: "Test" }] };
-    fetch.mockResolvedValueOnce({ ok: true, json: async () => postData });
+  test("Testa att rendera flera movers", () => {
 
-    const { fetchPosts } = await import("../../src/api-service.js");
-    let result = await fetchPosts();
+    const data = [
 
-    expect(fetch).toHaveBeenCalledWith("https://dummyjson.com/posts");
-    expect(result).toEqual(postData);
+      { workers: { name: "Karl Svensson",
+                   email: "karl.svensson@foretag.se",
+                   image: "pic.img",
+                   phone_number: "+46 70-123 45 09"
+       } },
+      { workers: { name: "Susanne Söderberg",
+                   email: "susanne.soderberg@foretag.se",
+                   image: "pic.img",
+                   phone_number: "+46 70-123 45 30"
+       } }
+    ];
+
+    const html = data.map(item => createMoverCard(item.workers)).join("");
+    
+    expect(html).toContain("Karl Svensson");
+    expect(html).toContain("susanne.soderberg@foretag.se");
+    expect(html).toContain("+46 70-123 45 30");
   });
 });
