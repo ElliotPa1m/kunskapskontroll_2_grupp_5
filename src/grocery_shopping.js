@@ -23,8 +23,8 @@ export function createGroceryWorkerCard(worker) {
       </div>
 
       <div class="buttons">
-        <button class="boka">Boka</button>
-        <button class="kontakta">Kontakta</button>
+        <button class="mover_button">Boka</button>
+    <button class="mover_button">Kontakta</button>
       </div>
     </div>
   `;
