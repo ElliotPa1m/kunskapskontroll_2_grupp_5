@@ -1,30 +1,104 @@
-import { describe, test, expect, beforeEach, vi } from "vitest";
+import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
+import {
+  fetchGroceryWorkers,
+  renderGroceryWorkers,
+  initGroceryShoppingPage,
+} from "../../src/grocery_shopping.js";
 
-describe("app integration", () => {
+describe("grocery shopping integration tests", () => {
   beforeEach(() => {
-    vi.resetModules();
-    vi.stubGlobal("fetch", vi.fn());
-    fetch.mockResolvedValue({
-      ok: true,
-      json: async () => ({ Response: "False" }),
-    });
-    document.body.innerHTML = `
-      <main class="container">
-        <h1>Inlägg</h1>
-        <select id="tag-filter"><option value="">Alla</option></select>
-        <div id="post-list"></div>
-      </main>
-    `;
+    document.body.innerHTML = `<div id="grocery-shoppers"></div>`;
   });
 
-  test("fetchPosts returns posts from API", async () => {
-    let postData = { posts: [{ id: 1, title: "Test" }] };
-    fetch.mockResolvedValueOnce({ ok: true, json: async () => postData });
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
 
-    const { fetchPosts } = await import("../../src/api-service.js");
-    let result = await fetchPosts();
+  test("fetchGroceryWorkers hämtar data från API", async () => {
+    const mockData = [
+      {
+        workers: {
+          name: "anna",
+          image: "https://example.com/anna.jpg",
+          phone_number: "070-123 45 67",
+          email: "anna@test.se",
+        },
+      },
+    ];
 
-    expect(fetch).toHaveBeenCalledWith("https://dummyjson.com/posts");
-    expect(result).toEqual(postData);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() =>
+        Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(mockData),
+        })
+      )
+    );
+
+    const result = await fetchGroceryWorkers();
+
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(result).toEqual(mockData);
+  });
+
+  test("renderGroceryWorkers renderar workers i DOM", () => {
+    const container = document.getElementById("grocery-shoppers");
+
+    const mockData = [
+      {
+        workers: {
+          name: "anna",
+          image: "https://example.com/anna.jpg",
+          phone_number: "070-123 45 67",
+          email: "anna@test.se",
+        },
+      },
+      {
+        workers: {
+          name: "erik",
+          image: "https://example.com/erik.jpg",
+          phone_number: "070-999 99 99",
+          email: "erik@test.se",
+        },
+      },
+    ];
+
+    renderGroceryWorkers(container, mockData);
+
+    expect(container.innerHTML).toContain("Anna");
+    expect(container.innerHTML).toContain("Erik");
+    expect(container.innerHTML).toContain("anna@test.se");
+    expect(container.innerHTML).toContain("erik@test.se");
+  });
+
+  test("initGroceryShoppingPage hämtar och renderar workers", async () => {
+    const mockData = [
+      {
+        workers: {
+          name: "anna",
+          image: "https://example.com/anna.jpg",
+          phone_number: "070-123 45 67",
+          email: "anna@test.se",
+        },
+      },
+    ];
+
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() =>
+        Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(mockData),
+        })
+      )
+    );
+
+    await initGroceryShoppingPage();
+
+    const container = document.getElementById("grocery-shoppers");
+    expect(container.innerHTML).toContain("Anna");
+    expect(container.innerHTML).toContain("Boka");
+    expect(container.innerHTML).toContain("Kontakta");
   });
 });
