@@ -26,8 +26,13 @@ test("grocery shopping page loads heading and workers", async ({ page }) => {
 
   const firstCard = page.locator(".mover-wrapper").first();
   await expect(firstCard).toBeVisible();
-
   await expect(firstCard).toContainText("Anna");
-  await expect(firstCard.locator(".boka")).toBeVisible();
-  await expect(firstCard.locator(".kontakta")).toBeVisible();
+
+  await expect(
+    firstCard.getByRole("button", { name: "Boka" })
+  ).toBeVisible();
+
+  await expect(
+    firstCard.getByRole("button", { name: "Kontakta" })
+  ).toBeVisible();
 });
