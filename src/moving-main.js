@@ -16,7 +16,7 @@ async function initLoad() {
 
     }
 
-    catch (error) {
+    catch {
 
         moverContainer.innerHTML = "Det har ballat ur fullständigt, vänligen uppsök en bättre hemsida."
 
