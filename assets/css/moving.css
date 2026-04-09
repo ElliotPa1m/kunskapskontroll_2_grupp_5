@@ -9,14 +9,6 @@ body {
     font-family: 'Barlow Condensed', sans-serif;
 }
 
-header {
-
-    height: 100px;
-    background-color: var(--header-footer-bg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 main {
 
@@ -66,7 +58,8 @@ span {
 
 }
 
-#movers {
+#movers,
+#grocery-shoppers {
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
