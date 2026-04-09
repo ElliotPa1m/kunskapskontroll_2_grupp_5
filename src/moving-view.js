@@ -11,7 +11,7 @@ export function createMoverCard(mover) {
     <div class="mover">
         
         <img class="moverPic" src="${mover.image}" alt="${mover.name}"/>
-        <h3 class="subHeader">Namn:</h3>
+        <h2 class="subHeader">Namn:</h2>
         <p>${firstCharsToUpperCase(mover.name)}</p>
         <h3 class="subHeader">Telefonnummer:</h3>
         <p>${mover.phone_number}</p> 
@@ -22,8 +22,8 @@ export function createMoverCard(mover) {
      
     <div class="buttons">
 
-    <button class="boka">Boka</button>
-    <button class="kontakta">Kontakta</button>
+    <button class="mover_button">Boka</button>
+    <button class="mover_button">Kontakta</button>
 
     </div>
 
