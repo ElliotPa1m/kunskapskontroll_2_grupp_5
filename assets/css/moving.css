@@ -49,7 +49,7 @@ span {
 
 }
 
-#movers {
+#movers, #grocery-shoppers {
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
