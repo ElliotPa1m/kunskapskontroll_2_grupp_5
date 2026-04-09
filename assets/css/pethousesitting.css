@@ -1,0 +1,51 @@
+body {
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+#pet-sitters {
+  display: grid;
+  grid-template-columns: repeat(3, 260px);
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+}
+
+.card {
+  width: 260px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 8px;
+  background: #ffe1a8;
+  text-align: center;
+  box-shadow: 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.card img {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 260px;
+  margin-top: 15px;
+}
+
+.buttons button {
+  background-color: var(--button-color);
+  color: var(--text-color);
+  width: 120px;
+  height: 45px;
+  border-radius: 6px;
+  border: 1px solid black;
+  margin: 5px;
+}
