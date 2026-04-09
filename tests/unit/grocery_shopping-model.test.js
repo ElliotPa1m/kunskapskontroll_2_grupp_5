@@ -1,22 +1,34 @@
-import { describe, test, expect, beforeEach } from "vitest";
-import { AppModel } from "../../src/app-model.js";
+import { describe, test, expect } from "vitest";
+import {
+  firstCharsToUpperCase,
+  createGroceryWorkerCard,
+} from "../../src/grocery_shopping.js";
 
-describe("app-model", () => {
-  let model;
-
-  beforeEach(() => {
-    model = new AppModel();
+describe("grocery shopping unit tests", () => {
+  test("firstCharsToUpperCase gör första bokstaven stor", () => {
+    expect(firstCharsToUpperCase("oscar")).toBe("Oscar");
   });
 
-  test("posts starts as empty array", () => {
-    expect(model.posts).toEqual([]);
+  test("firstCharsToUpperCase returnerar tom sträng om input saknas", () => {
+    expect(firstCharsToUpperCase("")).toBe("");
+    expect(firstCharsToUpperCase(null)).toBe("");
   });
 
-  test("reset clears all state", () => {
-    model.posts = [{ id: 1, title: "Hej" }];
-    model.selectedTag = "history";
-    model.reset();
-    expect(model.posts).toEqual([]);
-    expect(model.selectedTag).toBeNull();
+  test("createGroceryWorkerCard skapar HTML med worker-data", () => {
+    const worker = {
+      name: "anna",
+      image: "https://example.com/anna.jpg",
+      phone_number: "070-123 45 67",
+      email: "anna@test.se",
+    };
+
+    const html = createGroceryWorkerCard(worker);
+
+    expect(html).toContain("Anna");
+    expect(html).toContain("https://example.com/anna.jpg");
+    expect(html).toContain("070-123 45 67");
+    expect(html).toContain("anna@test.se");
+    expect(html).toContain("Boka");
+    expect(html).toContain("Kontakta");
   });
 });

@@ -1,12 +1,16 @@
 import { test, expect } from "@playwright/test";
 
-test("full flow: load posts and tags on start", async ({ page }) => {
-  await page.goto("/");
+test("grocery shopping page loads heading and workers", async ({ page }) => {
+  await page.goto("/grocery_shopping.html");
 
-  await expect(page.locator(".post-card").first()).toBeVisible();
-  await expect(page.locator(".post-card")).not.toHaveCount(0);
+  await expect(
+    page.getByRole("heading", { name: "Hjälp med handling" })
+  ).toBeVisible();
 
-  let options = page.locator("#tag-filter option");
-  await expect(options.first()).toHaveText("Alla");
-  expect(await options.count()).toBeGreaterThan(1);
+  const workerCards = page.locator(".mover-wrapper");
+  await expect(workerCards.first()).toBeVisible();
+  await expect(workerCards).not.toHaveCount(0);
+
+  await expect(page.locator(".boka").first()).toBeVisible();
+  await expect(page.locator(".kontakta").first()).toBeVisible();
 });
