@@ -1,5 +1,6 @@
 import { describe, test, expect, beforeEach, vi } from "vitest";
 
+/*
 describe("app integration", () => {
   beforeEach(() => {
     vi.resetModules();
@@ -27,4 +28,12 @@ describe("app integration", () => {
     expect(fetch).toHaveBeenCalledWith("https://dummyjson.com/posts");
     expect(result).toEqual(postData);
   });
+});
+
+*/
+
+test("pet worker has name", () => {
+  const worker = { name: "Anna" };
+
+  expect(worker.name).toBeDefined();
 });

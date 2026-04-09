@@ -2,6 +2,11 @@ body {
   font-family: 'Barlow Condensed', sans-serif;
 }
 
+h1 {
+  text-align: center;
+  margin: 40px;
+}
+
 #pet-sitters {
   display: grid;
   grid-template-columns: repeat(3, 260px);
