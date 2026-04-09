@@ -72,6 +72,7 @@ span {
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     padding: 20px;
+    min-height: 600px;
 
 }
 

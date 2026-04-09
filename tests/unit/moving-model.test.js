@@ -1,22 +1,25 @@
-import { describe, test, expect, beforeEach } from "vitest";
-import { AppModel } from "../../src/app-model.js";
 
-describe("app-model", () => {
-  let model;
 
-  beforeEach(() => {
-    model = new AppModel();
-  });
+import { createMoverCard } from "../../src/moving-view.js";
+import { describe, test, expect } from "vitest";
 
-  test("posts starts as empty array", () => {
-    expect(model.posts).toEqual([]);
-  });
 
-  test("reset clears all state", () => {
-    model.posts = [{ id: 1, title: "Hej" }];
-    model.selectedTag = "history";
-    model.reset();
-    expect(model.posts).toEqual([]);
-    expect(model.selectedTag).toBeNull();
-  });
-});
+describe("createMoverCard", () => {
+  
+
+  test("Namn, email och telefonnummer ska finnas i html", () => {
+   const mover = {
+    name: "Karl Svensson",
+    email: "karl.svensson@foretag.se",
+    image: "img.jpg",
+    phone_number: "+46 70-123 45 09",
+   }
+ 
+    const html = createMoverCard(mover);
+
+    expect(html).toContain("Karl Svensson");
+    expect(html).toContain("karl.svensson@foretag.se");
+    expect(html).toContain("+46 70-123 45 09");
+
+   });
+   });

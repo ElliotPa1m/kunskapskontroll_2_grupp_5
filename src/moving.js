@@ -42,7 +42,7 @@ async function fetchData() {
     `
         }).join("");
 
-    } catch (error) {
+    } catch {
         alert("Det har ballat ur fullständigt, vänligen uppsök en bättre hemsida.")
     }
 }
