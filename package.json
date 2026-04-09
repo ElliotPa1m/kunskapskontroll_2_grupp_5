@@ -23,7 +23,7 @@
   "homepage": "https://github.com/ElliotPa1m/kunskapskontroll_2_grupp_5#readme",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@playwright/test": "^1.59.0",
+    "@playwright/test": "^1.59.1",
     "@vitest/coverage-v8": "^4.1.2",
     "eslint": "^10.1.0",
     "globals": "^17.4.0",
