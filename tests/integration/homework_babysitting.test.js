@@ -1,30 +1,32 @@
-import { describe, test, expect, beforeEach, vi } from "vitest";
+import { describe,test,vi,expect } from "vitest";
+import { fetchWorkers } from "../../src/homework_babysitting";
 
-describe("app integration", () => {
-  beforeEach(() => {
-    vi.resetModules();
-    vi.stubGlobal("fetch", vi.fn());
-    fetch.mockResolvedValue({
-      ok: true,
-      json: async () => ({ Response: "False" }),
-    });
-    document.body.innerHTML = `
-      <main class="container">
-        <h1>Inlägg</h1>
-        <select id="tag-filter"><option value="">Alla</option></select>
-        <div id="post-list"></div>
-      </main>
-    `;
-  });
 
-  test("fetchPosts returns posts from API", async () => {
-    let postData = { posts: [{ id: 1, title: "Test" }] };
-    fetch.mockResolvedValueOnce({ ok: true, json: async () => postData });
 
-    const { fetchPosts } = await import("../../src/api-service.js");
-    let result = await fetchPosts();
-
-    expect(fetch).toHaveBeenCalledWith("https://dummyjson.com/posts");
-    expect(result).toEqual(postData);
-  });
-});
+describe('fetchWorkers integration with renderWorkers',()=>{
+    test('should fetch workers and display their names and images',async()=>{
+        //Stub global fetch
+        vi.stubGlobal('fetch',vi.fn());
+        //Mock fetch response
+        fetch.mockResolvedValue({
+            ok:true,
+            json:async()=>(
+               [{workers:{name:'Alice',image:'Alice.png'}},{workers:{name:'John',image:'John.png'}}]
+            )
+        })
+        //Prepare dom container
+         document.body.innerHTML='<ul class="container"></ul>';
+        //Run function
+        await fetchWorkers();
+        //Assert dom content
+        const container=document.querySelector('.container');
+        //Check that names are rendered
+        expect(container.textContent).toContain('Alice');
+        expect(container.textContent).toContain('John');
+        //Check that images are rendered
+        const images=document.querySelectorAll('img');
+        expect(images[0].src).toContain('Alice.png');
+        expect(images[1].src).toContain('John.png');
+       
+    })
+})

@@ -1,12 +1,13 @@
 import { test, expect } from "@playwright/test";
 
-test("full flow: load posts and tags on start", async ({ page }) => {
-  await page.goto("/");
+test('load workers', async ({ page }) => {
 
-  await expect(page.locator(".post-card").first()).toBeVisible();
-  await expect(page.locator(".post-card")).not.toHaveCount(0);
+  await page.goto('/homework_babysitting.html');
 
-  let options = page.locator("#tag-filter option");
-  await expect(options.first()).toHaveText("Alla");
-  expect(await options.count()).toBeGreaterThan(1);
+  // Wait for the container to be visible
+  await expect(page.locator('.container')).toBeVisible();
+
+  // Verify at least one worker is rendered
+  await expect(page.locator('.container li').first()).toBeVisible();
 });
+
